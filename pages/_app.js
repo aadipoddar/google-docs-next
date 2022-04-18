@@ -1,7 +1,8 @@
-import 'tailwindcss/tailwind.css'
-import '@material-tailwind/react/tailwind.css'
 import Head from 'next/head'
 import { Provider } from 'next-auth/client'
+import 'tailwindcss/tailwind.css'
+import '@material-tailwind/react/tailwind.css'
+import '../styles.css'
 
 export default function MyApp({ Component, pageProps }) {
   return (
