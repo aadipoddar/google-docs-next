@@ -9,8 +9,8 @@ export default function MyApp({ Component, pageProps }) {
     <Provider session={pageProps.session}>
       <Head>
         <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
+          href='https://fonts.googleapis.com/icon?family=Material+Icons'
+          rel='stylesheet'
         />
       </Head>
       <Component {...pageProps} />
