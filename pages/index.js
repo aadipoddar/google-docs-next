@@ -2,13 +2,16 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useSession, getSession } from 'next-auth/client'
 import { useState } from 'react'
+import firebase from 'firebase'
+import { db } from '../firebase'
+import Header from '../components/Header'
+import Login from '../components/Login'
+
 import Button from '@material-tailwind/react/Button'
 import Icon from '@material-tailwind/react/Icon'
 import Modal from '@material-tailwind/react/Modal'
 import ModalBody from '@material-tailwind/react/ModalBody'
 import ModalFooter from '@material-tailwind/react/ModalFooter'
-import Header from '../components/Header'
-import Login from '../components/Login'
 
 export default function Home() {
 
@@ -18,7 +21,18 @@ export default function Home() {
 
   if (!session) return <Login />
 
-  const createDocument = () => { }
+  const createDocument = () => {
+    if (!input.trim().length) return
+
+    db.collection('userDoc').doc(session.user.email)
+      .collection('docs').add({
+        fileName: input,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      })
+
+    setInput('')
+    setShowModal(false)
+  }
 
   const modal = (
     <Modal size='sm' active={showModal} toggler={() => setShowModal(false)}>
